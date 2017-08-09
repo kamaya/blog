@@ -1,0 +1,41 @@
+<h1>Mini blog</h1>
+
+<%= link_to '戻る', posts_path %>
+
+<hr size="4" color="gray">
+
+<p>
+<table>
+    <tr>
+      <td><%= @post.id %> : </td>
+      <td>投稿日時: <%= @post.created_at %> | </td>
+    </tr>
+    <tr>
+      <td><b><%= @post.text %></b></td>
+    </tr>
+</table>
+</p>
+
+
+<%= form_for( [@post, @post.comments.build] ) do |f| %>
+  <p>
+    <%= f.text_field :body, placeholder: "コメントをしよう", cols: 200, rows: 8 %>
+    <%= f.submit "コメントする" %>
+  </p>
+<% end %>
+
+<hr size="2" color="gray">
+
+<p>
+<% @post.comments.each do |comment| %>  
+  <p>
+  <table>
+    <tr>
+      <td><b><%= comment.body %></b> | </td>
+      <td>投稿日時: <%= comment.created_at %></td>
+    </tr>
+  </table>
+  </p>
+  <hr size="1" color="gray">
+<% end %>
+</p>
